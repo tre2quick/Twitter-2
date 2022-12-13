@@ -14,6 +14,7 @@
 		1DE460FB29437C22004A6ADB /* Twitter_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE460FA29437C22004A6ADB /* Twitter_2Tests.swift */; };
 		1DE4610529437C22004A6ADB /* Twitter_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4610429437C22004A6ADB /* Twitter_2UITests.swift */; };
 		1DE4610729437C22004A6ADB /* Twitter_2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4610629437C22004A6ADB /* Twitter_2UITestsLaunchTests.swift */; };
+		1DE461142948C2E6004A6ADB /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE461132948C2E6004A6ADB /* Users.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		1DE4610029437C22004A6ADB /* Twitter 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Twitter 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE4610429437C22004A6ADB /* Twitter_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_2UITests.swift; sourceTree = "<group>"; };
 		1DE4610629437C22004A6ADB /* Twitter_2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1DE461132948C2E6004A6ADB /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				1DE460EB29437C21004A6ADB /* ContentView.swift */,
 				1DE460ED29437C22004A6ADB /* Assets.xcassets */,
 				1DE460EF29437C22004A6ADB /* Preview Content */,
+				1DE461132948C2E6004A6ADB /* Users.swift */,
 			);
 			path = "Twitter 2";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE460EC29437C21004A6ADB /* ContentView.swift in Sources */,
+				1DE461142948C2E6004A6ADB /* Users.swift in Sources */,
 				1DE460EA29437C21004A6ADB /* Twitter_2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

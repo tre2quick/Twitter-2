@@ -7,11 +7,26 @@
 
 //How to make colors dependent on system color
 
+
 import SwiftUI
 
 struct User: Identifiable{
-    var id: Int
+    var id =  UUID()
     let profile_name, username, message: String
+}
+struct UserCollection {
+    // later, create a varaiable and function that allows users to input and create new tweets
+    
+    // Intiazlizer that creates tweets in list format.
+    let users: [User] = [
+        .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
+        .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
+        .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
+        .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!")
+
+        ]
+    
+    
 }
 
 struct FeedTweets: Identifiable{
@@ -20,16 +35,8 @@ struct FeedTweets: Identifiable{
 }
 
 struct ContentView: View {
-    // later, create a varaiable and function that allows users to input and create new tweets
     
-    // Intiazlizer that creates tweets in list format.
-    let users: [User] = [
-        .init(id: 0, profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
-        .init(id: 1, profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
-        .init(id: 2, profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
-        .init(id: 3, profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!")
-
-        ]
+    let users = UserCollection().users
         
     init (){
         UITableView.appearance().backgroundColor = .gray
