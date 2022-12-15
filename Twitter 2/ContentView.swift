@@ -6,7 +6,7 @@
 //
 
 //How to make colors dependent on system color
-
+// Create function that takes user input and creates a tweet
 
 import SwiftUI
 
@@ -27,6 +27,13 @@ struct UserCollection {
         ]
     
     
+}
+
+struct OurModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color.white)
+    }
 }
 
 struct FeedTweets: Identifiable{
@@ -52,7 +59,7 @@ struct ContentView: View {
               // List{
                VStack{
                    VStack {
-                       Image(uiImage: UIImage(imageLiteralResourceName: "TransformPic"))
+                       Image("TransformPic")
                            .resizable()
                            .frame(height:180)
                            .edgesIgnoringSafeArea(.all)
@@ -64,18 +71,18 @@ struct ContentView: View {
                                     .scaledToFit()
                                     .frame(width: 80, height: 80)
                                     .clipShape(Circle())
-                                    .overlay(Circle().stroke(.black, lineWidth: 5))
+                                    .overlay(Circle().stroke(      Color("BackgroundColor"), lineWidth: 5))
                                     .padding(.top, 100)
-                                    .padding(.leading, 30)
+                                    .padding(.leading, 15)
                                 
                                 Spacer()
                                 NavigationLink(destination: EditProfileView()){
                                     Text("Edit Profile")
-                                        .font(.system(size: 15))
-                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(Color("WordColor"))
                                         .bold()
                                         .overlay(Capsule().stroke(.gray, lineWidth: 1)
-                                            .padding(.all, -8))
+                                            .padding(.all, -10))
                                         .padding(.top, 140)
                                         .padding(.trailing, 20)
                                 }
@@ -91,86 +98,118 @@ struct ContentView: View {
                            VStack(alignment: .leading){
                                Text("Tre 🍾")
                                    .font(.system(size: 25))
-                                   .foregroundColor(.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .bold()
                                //.background(Color.red)
-                                   .padding(.leading, 30)
+                                   .padding(.leading, 15)
                                
                                //
                                Text("@__richtre")
                                    .foregroundColor(Color.gray)
                                    .font(.system(size: 13))
                                //.background(Color.yellow)
-                                   .padding(.leading, 30)
+                                   .padding(.leading, 15)
                                
                            }
                            Spacer()
                        }
                        
                    }
-                   .background(Color.black)
+                   .background(Color("BackgroundColor"))
                    
                    //Profile Head Info
                    VStack(alignment: .leading){
                        //BIO
                        Text("Entrepreneur 💰")
-                           .padding(.top, 10)
-                           .padding(.leading, 30)
-                           .foregroundColor(.white)
+                           .padding(.top, 5)
+                           .padding(.leading, 15)
+                           .padding(.bottom, -2)
+                           .foregroundColor(Color("WordColor"))
                            .font(.system(size: 17))
+                       
                        
                        HStack{
                            //Location
+                           Image(systemName: "location")
+                               .padding(.leading, 15)
+                               .foregroundColor(.gray)
                            Text("Detroit, MI")
-                               .padding(.leading, 30)
+                               .padding(.leading, -2)
                                .foregroundColor(.gray)
                                .font(.system(size: 13))
 
                            //Birthdate
-                           Text("December 2, 1999")
+                           Image(systemName: "balloon")
                                .padding(.leading, 10)
+                               .foregroundColor(.gray)
+                           Text("December 2, 1999")
+                               .padding(.leading, -2)
                                .foregroundColor(.gray)
                                .font(.system(size: 13))
 
                            Spacer()
                        }.padding(.init(top: 0.5, leading: 0, bottom: 0, trailing: 0))
                        
+                       HStack {
+                           Image(systemName: "calendar")
+                               .padding(.leading, 15)
+                               .foregroundColor(.gray)
+                           Text("Joined September 2011")
+                               .padding(.top, -2)
+                               .padding(.leading, -2)
+                               .foregroundColor(.gray)
+                               .font(.system(size: 13))
+                       }.padding(.init(top: -4, leading: 0, bottom: 0, trailing: 0))
+                       
                        HStack{
                            Text("367")
-                               .foregroundColor(Color.white)
+                               .foregroundColor(Color("WordColor"))
                                .bold()
-                               .padding(.leading, 30)
+                               .padding(.leading, 15)
+                               .font(.system(size: 15))
+
                            Text("Following")
                                .foregroundColor(Color.gray)
+                               .font(.system(size: 13))
+
 
                            Text("602")
-                               .foregroundColor(Color.white)
+                               .foregroundColor(Color("WordColor"))
                                .bold()
+                               .font(.system(size: 15))
+
 
                            Text("Followers")
                                .foregroundColor(Color.gray)
+                               .font(.system(size: 13))
+
 
                            Spacer()
                        }.padding(.init(top: 2, leading: 0, bottom: 0, trailing: 0))
-                   }.padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
+                   }.padding(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                       .background(Color("BackgroundColor"))
+
                    
                    //MENU
                    
                    HStack(spacing: 30){
                        Text("Tweets")
-                           .foregroundColor(.white)
-                       
+                           .foregroundColor(.gray)
+                           .bold()
+
                        Text("Tweets & Replies")
-                           .foregroundColor(.white)
-                       
+                           .foregroundColor(.gray)
+                           .bold()
                        Text("Media")
-                           .foregroundColor(.white)
-                       
+                           .foregroundColor(.gray)
+                           .bold()
                        Text("Likes")
-                           .foregroundColor(.white)
-                       
+                           .foregroundColor(.gray)
+                           .bold()
                        
                    }.padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
+                
+
                    
                    Rectangle()
                        .foregroundColor(Color.gray)
@@ -202,7 +241,7 @@ struct ContentView: View {
                                            .scaledToFit()
                                            .frame(width: 60, height: 60)
                                            .clipShape(Circle())
-                                           .padding(.leading, 20)
+                                           //.padding(.leading, 15)
                                    }.padding(.bottom, 25)
                                        .listRowBackground(Color.black)
                                    
@@ -214,7 +253,7 @@ struct ContentView: View {
                                                .font(.headline)
                                            Text(user.username)
                                                .font(.subheadline)
-                                       }.padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
+                                       }.padding(.init(top: -8, leading: 0, bottom: 0, trailing: 0))
                                            .listRowBackground(Color.black)
                                        
                                        
@@ -271,35 +310,35 @@ struct ContentView: View {
                        HStack(spacing: 40){
                            NavigationLink(destination: FeedPageView()){
                                Image(systemName: "house")
-                                   .foregroundColor(Color.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .frame(height: 40)
                                    .font(.system(size: 30))
                            }
                            
                            NavigationLink(destination: SearchPageView()){
                                Image(systemName: "magnifyingglass")
-                                   .foregroundColor(Color.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .frame(height: 40)
                                    .font(.system(size: 30))
                            }
                            
                            NavigationLink(destination: SpacesPageView()){
                                Image(systemName: "mic.circle")
-                                   .foregroundColor(Color.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .frame(height: 40)
                                    .font(.system(size: 30))
                            }
                            
                            NavigationLink(destination: NotifcationsPageView()){
                                Image(systemName: "bell")
-                                   .foregroundColor(Color.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .frame(height: 40)
                                    .font(.system(size: 30))
                            }
                            
                            NavigationLink(destination: DmPageView()){
                                Image(systemName: "message")
-                                   .foregroundColor(Color.white)
+                                   .foregroundColor(Color("WordColor"))
                                    .frame(height: 40)
                                    .font(.system(size: 30))
                            }
@@ -308,6 +347,8 @@ struct ContentView: View {
                        }
                    
                     }
+                    .background(Color("BackgroundColor"))
+
                 }
             }
         }
@@ -369,7 +410,7 @@ struct FeedPageView: View {
     
     let tweets: [FeedTweets] = [
         
-        .init(id: 0, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
+        .init(id: 0, profile_name: "Dev", username: "@appledeveloperacademy", message: "Hey Yall"),
         .init(id: 1, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
         .init(id: 2, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
         .init(id: 3, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
