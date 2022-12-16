@@ -13,6 +13,7 @@ import SwiftUI
 struct User: Identifiable{
     var id =  UUID()
     let profile_name, username, message: String
+    // var id = Int, if used must put var id = 0, var id = 1... in next strut
 }
 struct UserCollection {
     // later, create a varaiable and function that allows users to input and create new tweets
@@ -23,8 +24,8 @@ struct UserCollection {
         .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
         .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!"),
         .init(profile_name: "Tre 🍾", username: "@__richtre", message: "The apple developer academy is amazing!")
-
-        ]
+        
+    ]
     
     
 }
@@ -44,315 +45,310 @@ struct FeedTweets: Identifiable{
 struct ContentView: View {
     
     let users = UserCollection().users
-        
+    
     init (){
         UITableView.appearance().backgroundColor = .gray
     }
-
-
+    
+    
     
     var body: some View {
         NavigationView {
-           ZStack {
-               Color.black
-                   .edgesIgnoringSafeArea(.all)
-              // List{
-               VStack{
-                   VStack {
-                       Image("TransformPic")
-                           .resizable()
-                           .frame(height:180)
-                           .edgesIgnoringSafeArea(.all)
-                           .overlay(
-                                        //Overlay includes profile pic and edit profile button
-                            HStack{
-                                Image(uiImage: UIImage(imageLiteralResourceName: "ProfilePic2"))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 80, height: 80)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(      Color("BackgroundColor"), lineWidth: 5))
-                                    .padding(.top, 100)
-                                    .padding(.leading, 15)
+            ZStack {
+                Color.black
+                    .edgesIgnoringSafeArea(.all)
+                // List{
+                VStack{
+                    ScrollView{
+                        VStack {
+                            Image("TransformPic")
+                                .resizable()
+                                .frame(height:160)
+                                .overlay(
+                                    //Overlay includes profile pic and edit profile button
+                                    HStack{
+                                        Image(uiImage: UIImage(imageLiteralResourceName: "ProfilePic2"))
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 80, height: 80)
+                                            .clipShape(Circle())
+                                            .overlay(Circle().stroke(      Color("BackgroundColor"), lineWidth: 5))
+                                            .padding(.top, 190)
+                                            .padding(.leading, 15)
+                                        
+                                        Spacer()
+                                        NavigationLink(destination: EditProfileView()){
+                                            Text("Edit Profile")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(Color("WordColor"))
+                                                .bold()
+                                                .overlay(Capsule().stroke(.gray, lineWidth: 1)
+                                                    .padding(.all, -9))
+                                                .padding(.top, 210)
+                                                .padding(.trailing, 20)
+                                        }
+                                        
+                                    }
                                 
-                                Spacer()
-                                NavigationLink(destination: EditProfileView()){
-                                    Text("Edit Profile")
-                                        .font(.system(size: 14))
+                                    
+                                )
+                            
+                            
+                            // User Profile Pic
+                            //Add Image to below var to create picture upload.
+                            //var userProfilePic = String()
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text("Tre 🍾")
+                                        .font(.system(size: 25))
                                         .foregroundColor(Color("WordColor"))
                                         .bold()
-                                        .overlay(Capsule().stroke(.gray, lineWidth: 1)
-                                            .padding(.all, -10))
-                                        .padding(.top, 140)
-                                        .padding(.trailing, 20)
+                                        .padding(.top, 50)
+                                        .padding(.leading, 15)
+                                    
+                                    //
+                                    Text("@__richtre")
+                                        .foregroundColor(Color.gray)
+                                        .font(.system(size: 13))
+                                    //.background(Color.yellow)
+                                        .padding(.leading, 15)
+                                    
                                 }
-                                
+                                Spacer()
                             }
+                            
+                        }
+                        .background(Color("BackgroundColor"))
                         
-                           )
-                       
-                       // User Profile Pic
-                       //Add Image to below var to create picture upload.
-                       //var userProfilePic = String()
-                       HStack{
-                           VStack(alignment: .leading){
-                               Text("Tre 🍾")
-                                   .font(.system(size: 25))
-                                   .foregroundColor(Color("WordColor"))
-                                   .bold()
-                               //.background(Color.red)
-                                   .padding(.leading, 15)
-                               
-                               //
-                               Text("@__richtre")
-                                   .foregroundColor(Color.gray)
-                                   .font(.system(size: 13))
-                               //.background(Color.yellow)
-                                   .padding(.leading, 15)
-                               
-                           }
-                           Spacer()
-                       }
-                       
-                   }
-                   .background(Color("BackgroundColor"))
-                   
-                   //Profile Head Info
-                   VStack(alignment: .leading){
-                       //BIO
-                       Text("Entrepreneur 💰")
-                           .padding(.top, 5)
-                           .padding(.leading, 15)
-                           .padding(.bottom, -2)
-                           .foregroundColor(Color("WordColor"))
-                           .font(.system(size: 17))
-                       
-                       
-                       HStack{
-                           //Location
-                           Image(systemName: "location")
-                               .padding(.leading, 15)
-                               .foregroundColor(.gray)
-                           Text("Detroit, MI")
-                               .padding(.leading, -2)
-                               .foregroundColor(.gray)
-                               .font(.system(size: 13))
-
-                           //Birthdate
-                           Image(systemName: "balloon")
-                               .padding(.leading, 10)
-                               .foregroundColor(.gray)
-                           Text("December 2, 1999")
-                               .padding(.leading, -2)
-                               .foregroundColor(.gray)
-                               .font(.system(size: 13))
-
-                           Spacer()
-                       }.padding(.init(top: 0.5, leading: 0, bottom: 0, trailing: 0))
-                       
-                       HStack {
-                           Image(systemName: "calendar")
-                               .padding(.leading, 15)
-                               .foregroundColor(.gray)
-                           Text("Joined September 2011")
-                               .padding(.top, -2)
-                               .padding(.leading, -2)
-                               .foregroundColor(.gray)
-                               .font(.system(size: 13))
-                       }.padding(.init(top: -4, leading: 0, bottom: 0, trailing: 0))
-                       
-                       HStack{
-                           Text("367")
-                               .foregroundColor(Color("WordColor"))
-                               .bold()
-                               .padding(.leading, 15)
-                               .font(.system(size: 15))
-
-                           Text("Following")
-                               .foregroundColor(Color.gray)
-                               .font(.system(size: 13))
-
-
-                           Text("602")
-                               .foregroundColor(Color("WordColor"))
-                               .bold()
-                               .font(.system(size: 15))
-
-
-                           Text("Followers")
-                               .foregroundColor(Color.gray)
-                               .font(.system(size: 13))
-
-
-                           Spacer()
-                       }.padding(.init(top: 2, leading: 0, bottom: 0, trailing: 0))
-                   }.padding(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                       .background(Color("BackgroundColor"))
-
-                   
-                   //MENU
-                   
-                   HStack(spacing: 30){
-                       Text("Tweets")
-                           .foregroundColor(.gray)
-                           .bold()
-
-                       Text("Tweets & Replies")
-                           .foregroundColor(.gray)
-                           .bold()
-                       Text("Media")
-                           .foregroundColor(.gray)
-                           .bold()
-                       Text("Likes")
-                           .foregroundColor(.gray)
-                           .bold()
-                       
-                   }.padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
-                
-
-                   
-                   Rectangle()
-                       .foregroundColor(Color.gray)
-                       .frame(height: 1)
-                   
-                   
-                   
-               Spacer()
-                   
-                   
-            // Dynamic list/feed
-                   
-                   //One way to create a dynamic list
-//                   List(users) {
-//                       Text($0.username)  //  represents one of the users
-//                   }.navigationBarTitle(Text("Dynamic List"))
-//
-                  
-                   VStack{
-                       List {
-                           ForEach(users) { user in
-                               // user row
-                               
-                               HStack{
-                                   
-                                   VStack {
-                                       Image("ProfilePic2")
-                                           .resizable()
-                                           .scaledToFit()
-                                           .frame(width: 60, height: 60)
-                                           .clipShape(Circle())
-                                           //.padding(.leading, 15)
-                                   }.padding(.bottom, 25)
-                                       .listRowBackground(Color.black)
-                                   
-                                   VStack(alignment: .leading){
-                                       
-                                       HStack{
-                                           
-                                           Text(user.profile_name)
-                                               .font(.headline)
-                                           Text(user.username)
-                                               .font(.subheadline)
-                                       }.padding(.init(top: -8, leading: 0, bottom: 0, trailing: 0))
-                                           .listRowBackground(Color.black)
-                                       
-                                       
-                                       Text(user.message)
-                                           .padding(.top, -9)
-                                           .font(.subheadline)
-                                           .lineLimit(nil)
-                                           .listRowBackground(Color.black)
-                                       
-                                       
-                                       HStack(spacing: 50){
-                                           //Retweet comment and like options
-                                           Image(systemName: "message")
-                                               .foregroundColor(Color.gray)
-                                               .listRowBackground(Color.black)
-                                           
-                                               .font(.system(size: 17))
-                                           Image(systemName: "arrow.2.squarepath")
-                                               .foregroundColor(Color.gray)
-                                           
-                                               .font(.system(size: 17))
-                                           Image(systemName: "heart")
-                                               .foregroundColor(Color.gray)
-                                           
-                                               .font(.system(size: 17))
-                                           Image(systemName: "arrow.up.square")
-                                               .foregroundColor(Color.gray)
-                                           
-                                               .font(.system(size: 17))
-                                       }.padding(.init(.init(top: 2, leading: 0, bottom: 0, trailing: 0)))
-                                       
-                                       
-                                       
-                                       
-                                   }.padding(.init(top: 0, leading: 5, bottom: 0, trailing: 0))
-                                   
-                                   
-                               }
-
-                               
-                               
-                           }
-                           //.listRowBackground(Color.black) //End of for each
-                           
-                       }
-                       .listStyle(.inset)
-
-                       }
-
-                       
-                       
-                       
-                       
-                       HStack(spacing: 40){
-                           NavigationLink(destination: FeedPageView()){
-                               Image(systemName: "house")
-                                   .foregroundColor(Color("WordColor"))
-                                   .frame(height: 40)
-                                   .font(.system(size: 30))
-                           }
-                           
-                           NavigationLink(destination: SearchPageView()){
-                               Image(systemName: "magnifyingglass")
-                                   .foregroundColor(Color("WordColor"))
-                                   .frame(height: 40)
-                                   .font(.system(size: 30))
-                           }
-                           
-                           NavigationLink(destination: SpacesPageView()){
-                               Image(systemName: "mic.circle")
-                                   .foregroundColor(Color("WordColor"))
-                                   .frame(height: 40)
-                                   .font(.system(size: 30))
-                           }
-                           
-                           NavigationLink(destination: NotifcationsPageView()){
-                               Image(systemName: "bell")
-                                   .foregroundColor(Color("WordColor"))
-                                   .frame(height: 40)
-                                   .font(.system(size: 30))
-                           }
-                           
-                           NavigationLink(destination: DmPageView()){
-                               Image(systemName: "message")
-                                   .foregroundColor(Color("WordColor"))
-                                   .frame(height: 40)
-                                   .font(.system(size: 30))
-                           }
-                           
-                           
-                       }
-                   
+                        //Profile Head Info
+                        VStack(alignment: .leading){
+                            //BIO
+                            Text("Entrepreneur 💰")
+                                .padding(.top, 5)
+                                .padding(.leading, 15)
+                                .padding(.bottom, -2)
+                                .foregroundColor(Color("WordColor"))
+                                .font(.system(size: 17))
+                            
+                            
+                            HStack{
+                                //Location
+                                Image(systemName: "location")
+                                    .padding(.leading, 15)
+                                    .foregroundColor(.gray)
+                                Text("Detroit, MI")
+                                    .padding(.leading, -2)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 13))
+                                
+                                //Birthdate
+                                Image(systemName: "balloon")
+                                    .padding(.leading, 10)
+                                    .foregroundColor(.gray)
+                                Text("December 2, 1999")
+                                    .padding(.leading, -2)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 13))
+                                
+                                Spacer()
+                            }.padding(.init(top: 0.5, leading: 0, bottom: 0, trailing: 0))
+                            
+                            HStack {
+                                Image(systemName: "calendar")
+                                    .padding(.leading, 15)
+                                    .foregroundColor(.gray)
+                                Text("Joined September 2011")
+                                    .padding(.top, -2)
+                                    .padding(.leading, -2)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 13))
+                            }.padding(.init(top: -4, leading: 0, bottom: 0, trailing: 0))
+                            
+                            HStack{
+                                Text("367")
+                                    .foregroundColor(Color("WordColor"))
+                                    .bold()
+                                    .padding(.leading, 15)
+                                    .font(.system(size: 14))
+                                
+                                Text("Following")
+                                    .padding(.leading, -4)
+                                    .foregroundColor(Color.gray)
+                                    .font(.system(size: 13))
+                                
+                                
+                                Text("602")
+                                    .padding(.leading, 4)
+                                    .foregroundColor(Color("WordColor"))
+                                    .bold()
+                                    .font(.system(size: 14))
+                                
+                                
+                                Text("Followers")
+                                    .padding(.leading, -4)
+                                    .foregroundColor(Color.gray)
+                                    .font(.system(size: 13))
+                                
+                                
+                                Spacer()
+                            }.padding(.init(top: 2, leading: 0, bottom: 0, trailing: 0))
+                        }.padding(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            .background(Color("BackgroundColor"))
+                        
+                        
+                        //MENU
+                        
+                        HStack(spacing: 20){
+                            Text("Tweets")
+                            // .padding(.leading, 1)
+                                .foregroundColor(.gray)
+                                .bold()
+                            
+                            Text("Tweets & Replies")
+                                .foregroundColor(.gray)
+                                .bold()
+                            Text("Media")
+                                .foregroundColor(.gray)
+                                .bold()
+                            Text("Likes")
+                                .foregroundColor(.gray)
+                                .bold()
+                            
+                        }.padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
+                        
+                        
+                        
+                        Rectangle()
+                            .foregroundColor(Color.gray)
+                            .frame(height: 1)
+                        
+                        
+                        
+                        Spacer()
+                        
+                        
+                        // Dynamic list/feed
+                        
+                        //One way to create a dynamic list
+                        //                   List(users) {
+                        //                       Text($0.username)  //  represents one of the users
+                        //                   }.navigationBarTitle(Text("Dynamic List"))
+                        //
+                        
+                        VStack{
+                            //List {
+                            ForEach(users) { user in
+                                // user row
+                                
+                                HStack{
+                                    
+                                    VStack {
+                                        Image("ProfilePic2")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(Circle())
+                                        //.padding(.leading, 15)
+                                    }.padding(.bottom, 25)
+                                        .listRowBackground(Color.black)
+                                    
+                                    VStack(alignment: .leading){
+                                        
+                                        HStack{
+                                            
+                                            Text(user.profile_name)
+                                                .font(.headline)
+                                            Text(user.username)
+                                                .font(.subheadline)
+                                        }.padding(.init(top: -8, leading: 0, bottom: 0, trailing: 0))
+                                            .listRowBackground(Color.black)
+                                        
+                                        
+                                        Text(user.message)
+                                            .padding(.top, -9)
+                                            .font(.subheadline)
+                                            .lineLimit(nil)
+                                            .listRowBackground(Color.black)
+                                        
+                                        
+                                        HStack(spacing: 50){
+                                            //Retweet comment and like options
+                                            Image(systemName: "message")
+                                                .foregroundColor(Color.gray)
+                                                .listRowBackground(Color.black)
+                                                .font(.system(size: 14))
+                                            
+                                            Image(systemName: "arrow.2.squarepath")
+                                                .foregroundColor(Color.gray)
+                                            
+                                                .font(.system(size: 14))
+                                            Image(systemName: "heart")
+                                                .foregroundColor(Color.gray)
+                                            
+                                                .font(.system(size: 14))
+                                            Image(systemName: "arrow.up.square")
+                                                .foregroundColor(Color.gray)
+                                            
+                                                .font(.system(size: 14))
+                                        }.padding(.init(.init(top: 1, leading: 0, bottom: 0, trailing: 0)))
+                                    }.padding(.init(top: 0, leading: 5, bottom: 0, trailing: 0))
+                                }
+                            }
+                            //.listRowBackground(Color.black) //End of for each
+                            
+                            //                            }
+                            //                            .listStyle(.inset)
+                            
+                        }
                     }
-                    .background(Color("BackgroundColor"))
-
+                    HStack(spacing: 40){
+                        NavigationLink(destination: FeedPageView()){
+                            Image(systemName: "house")
+                                .foregroundColor(Color("WordColor"))
+                                .frame(height: 30)
+                                .font(.system(size: 25))
+                        }
+                        
+                        NavigationLink(destination: SearchPageView()){
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(Color("WordColor"))
+                                .frame(height: 30)
+                                .font(.system(size: 25))
+                        }
+                        
+                        NavigationLink(destination: SpacesPageView()){
+                            Image(systemName: "mic.circle")
+                                .foregroundColor(Color("WordColor"))
+                                .frame(height: 30)
+                                .font(.system(size: 25))
+                        }
+                        
+                        NavigationLink(destination: NotifcationsPageView()){
+                            Image(systemName: "bell")
+                                .foregroundColor(Color("WordColor"))
+                                .frame(height: 30)
+                                .font(.system(size: 25))
+                        }
+                        
+                        NavigationLink(destination: DmPageView()){
+                            Image(systemName: "message")
+                                .foregroundColor(Color("WordColor"))
+                                .frame(height: 30)
+                                .font(.system(size: 25))
+                        }
+                        
+                        
+                    }
+                    
                 }
+                .background(Color("BackgroundColor"))
+                
             }
+            .edgesIgnoringSafeArea(.top)
         }
     }
+}
+//}
 
 struct EditProfileView: View {
     var body: some View{
@@ -367,35 +363,35 @@ struct EditProfileView: View {
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
@@ -419,8 +415,8 @@ struct FeedPageView: View {
         .init(id: 6, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
         .init(id: 7, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code"),
         .init(id: 8, profile_name: "Dev", username: "@appledeveloperacademy", message: "Who's ready to code")
-    
-    
+        
+        
     ]
     
     var body: some View{
@@ -464,22 +460,22 @@ struct FeedPageView: View {
                                 HStack(spacing: 50){
                                     //Retweet comment and like options
                                     Image(systemName: "message")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(Color("WordColor"))
                                         .listRowBackground(Color.black)
-                                    
                                         .font(.system(size: 17))
+                                    
                                     Image(systemName: "arrow.2.squarepath")
-                                        .foregroundColor(Color.gray)
-                                    
+                                        .foregroundColor(Color("WordColor"))
                                         .font(.system(size: 17))
+                                    
                                     Image(systemName: "heart")
-                                        .foregroundColor(Color.gray)
-                                    
+                                        .foregroundColor(Color("WordColor"))
                                         .font(.system(size: 17))
+                                    
                                     Image(systemName: "arrow.up.square")
-                                        .foregroundColor(Color.gray)
-                                    
+                                        .foregroundColor(Color("WordColor"))
                                         .font(.system(size: 17))
+                                    
                                 }.padding(.init(.init(top: 2, leading: 0, bottom: 0, trailing: 0)))
                                 
                                 
@@ -489,7 +485,7 @@ struct FeedPageView: View {
                             
                             
                         }
-
+                        
                         
                         
                     }
@@ -497,41 +493,41 @@ struct FeedPageView: View {
                     
                 }
                 .listStyle(.inset)
-               
+                
                 Spacer()
                 
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
@@ -554,35 +550,35 @@ struct SearchPageView: View {
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
@@ -605,35 +601,35 @@ struct SpacesPageView: View {
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
@@ -656,35 +652,35 @@ struct NotifcationsPageView: View {
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
@@ -707,35 +703,35 @@ struct DmPageView: View {
                 HStack(spacing: 40){
                     NavigationLink(destination: FeedPageView()){
                         Image(systemName: "house")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SearchPageView()){
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: SpacesPageView()){
                         Image(systemName: "mic.circle")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: NotifcationsPageView()){
                         Image(systemName: "bell")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
                     
                     NavigationLink(destination: DmPageView()){
                         Image(systemName: "message")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("WordColor"))
                             .frame(height: 40)
                             .font(.system(size: 30))
                     }
